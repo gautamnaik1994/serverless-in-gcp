@@ -9,12 +9,7 @@ app = Flask(__name__)
 def get_employee(id):
     client = datastore.Client()
     key = client.key("employee", id)
-    entity = client.get(key)
-
-    if entity:
-        return jsonify(entity)
-    else:
-        return jsonify("Not Found")
+    return jsonify(entity) if (entity := client.get(key)) else jsonify("Not Found")
 
 
 if __name__ == '__main__':
